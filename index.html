@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161826">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Unité 3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23161826'/%3E%3Ctext x='50' y='66' font-family='Arial' font-size='46' font-weight='700' fill='%239184d9' text-anchor='middle'%3EFR%3C/text%3E%3C/svg%3E">
+<title>Französisch · Unité 3</title>
+<style>
+:root{--bg:#161826;--card:#20233a;--card2:#2a2e4a;--text:#e9e9ed;--mute:#9397ab;--line:#3a3f5c;--accent:#9184d9;--accent-l:#d2cefd;--accent-m:#b5abfc;--accent-d:#423a6a;--bad:#75798c;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%;
+  background:radial-gradient(900px 500px at 0% 0%,#2b2741,transparent 70%),var(--bg);min-height:100vh;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+#app{max-width:760px;margin:0 auto;padding:28px 20px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3,h6{margin:0;font-weight:600}
+h1{font-size:clamp(30px,7vw,44px);letter-spacing:-.02em;line-height:1.1}
+h2{font-size:28px;letter-spacing:-.01em}
+h3{font-size:22px}
+h6{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+h6.acc{color:var(--accent-m)}
+p{margin:0}
+.mute{color:var(--mute)}
+.col{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 6px 18px rgba(0,0,0,.25)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:10px;padding:10px 16px;min-height:44px;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#14112a;font-weight:600}
+.btn.pri:hover{background:var(--accent-m)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--accent-l)}
+.btn.ghost:hover{border-color:var(--line)}
+.btn.sel{background:var(--accent);border-color:var(--accent);color:#14112a;font-weight:600}
+.btn.key{min-width:42px;padding:6px 10px;min-height:42px;font-size:18px}
+.input{font:inherit;font-size:20px;color:var(--text);background:#12142a;border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-height:46px;width:100%;max-width:100%}
+.input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.input.sm{width:min(240px,100%)}
+.input:disabled{opacity:.6}
+.hint{font-size:13px;color:var(--mute)}
+.top{display:flex;align-items:center;gap:14px}
+.prog{flex:1;height:4px;border-radius:2px;background:#3f424d}
+.prog i{display:block;height:4px;border-radius:2px;background:var(--accent);transition:width .25s}
+.main{font-size:clamp(24px,5.5vw,32px);line-height:1.25;font-weight:600;letter-spacing:-.015em}
+.sent{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:22px;line-height:1.5}
+.fb{display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:12px;background:var(--card)}
+.fb .ic{font-size:26px;line-height:1}
+.bars{display:flex;gap:32px;align-items:flex-end;margin-top:8px}
+.bar{position:relative;width:96px;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.bar .n{font-size:22px;font-weight:600}
+.bar .b{min-height:3px;border-radius:6px;transition:height .25s}
+.bar .l{font-size:13px;color:var(--mute)}
+.pop{display:none;position:absolute;left:0;bottom:calc(100% + 8px);z-index:5;min-width:190px;max-width:300px;max-height:220px;overflow:auto;padding:12px 16px;flex-direction:column;gap:4px;font-size:14px;background:var(--card2);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.pop.on,.bar:hover .pop{display:flex}
+.score{font-size:72px;line-height:1;font-weight:600;color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--mute);font-weight:500;font-size:13px}
+.tag{display:inline-block;padding:2px 12px;border-radius:99px;background:var(--accent-d);color:var(--accent-l);font-size:14px}
+.sp{height:1px;width:240px;background:linear-gradient(90deg,var(--accent),transparent)}
+.mr{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--line)}
+.mr span:last-child{color:var(--accent-l)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const KEY = 'franzoesisch-unite-3-daniil-v1';
+const V = [
+["3", "un anniversaire", "ein Geburtstag", "Son {anniversaire}, c’est le 19 décembre.", "Er hat am 19. Dezember Geburtstag.", "", []],
+["3", "Bon anniversaire ! / Joyeux anniversaire !", "Alles Gute zum Geburtstag! / Herzlichen Glückwunsch zum Geburtstag!", "", "", "Zum Geburtstag wird in Frankreich das Lied „Joyeux anniversaire“ gesungen; die Melodie ist dieselbe wie bei „Happy birthday to you“.", ["Bon anniversaire", "Joyeux anniversaire"]],
+["3", "une idée", "eine Idee; ein Gedanke", "C’est une {idée} super.", "Das ist eine Superidee.", "", []],
+["3", "des", "des ist der Plural von „un“ und „une“", "Fabien et Victor sont {des} frères.", "Fabien und Victor sind Brüder.", "", []],
+["3", "un livre", "ein Buch", "", "", "Plural: des livres", []],
+["3", "une gomme", "ein Radiergummi", "", "", "Plural: des gommes", []],
+["3", "un cadeau/des cadeaux", "ein Geschenk; Geschenke", "des idées pour un {cadeau}", "Ideen für ein Geschenk", "Plural mit -x, ebenso: un gâteau/des gâteaux", ["un cadeau", "des cadeaux"]],
+["3", "aujourd’hui", "heute", "", "", "", []],
+["3", "la FNAC", "die FNAC", "", "", "Die FNAC ist eine französische Ladenkette, die hauptsächlich Bücher, CDs, DVDs und Elektronikartikel vertreibt, oft zu günstigeren Preisen als anderswo.", []],
+["3", "il y a", "es gibt, es ist, es sind", "Dans le carton, {il y a} un chien.", "In dem Karton ist ein Hund.", "", []],
+["3", "un CD/des CD", "eine CD / CDs", "Alex écoute des {CD}.", "Alex hört CDs (an).", "des CD und des BD erhalten im Plural kein -s.", ["un CD", "des CD"]],
+["3", "bientôt", "bald", "C’est {bientôt} l’anniversaire de Léo !", "Bald ist Léos Geburtstag.", "", []],
+["3", "Ah, bon ?", "Ach ja?; Wirklich?", "", "", "", []],
+["3", "ensemble", "gemeinsam, zusammen", "On cherche un cadeau {ensemble} ?", "Sollen wir gemeinsam ein Geschenk suchen?", "", []],
+["3", "une histoire", "eine Geschichte", "", "", "Plural: des histoires (mit Bindung: des_histoires)", []],
+["3", "ou", "oder", "", "", "Gleiche Aussprache: ou = „oder“, où = „wo“.", []],
+["3", "un ordinateur", "ein Computer", "", "", "Plural: des ordinateurs; Kurzform: l’ordi", ["un ordi"]],
+["3", "acheter qc", "etwas kaufen", "J’{achète} un cadeau pour Léo.", "Ich kaufe ein Geschenk für Léo.", "acheter: j’achète, tu achètes, il/elle/on achète, nous achetons, vous achetez, ils/elles achètent", []],
+["3", "d’abord", "zuerst", "", "", "", []],
+["3", "bien sûr", "Sicherlich!; Na klar!; Selbstverständlich!", "", "", "", []],
+["3", "Qu’est-ce qu’il y a ?", "Was gibt es?", "{Qu’est-ce qu’il y a} dans le magasin de Mme Latière ?", "Was gibt es im Geschäft von Frau Latière?", "", []],
+["3", "préparer qc", "etwas vorbereiten", "On {prépare} l’anniversaire.", "Wir bereiten den Geburtstag vor.", "préparer: je prépare, tu prépares, il/elle/on prépare, nous préparons, vous préparez, ils/elles préparent; englisch: to prepare", []],
+["3", "la France", "Frankreich", "", "", "", []],
+["3", "l’Allemagne (f.)", "Deutschland", "", "", "", []],
+["3", "en", "in (vor Ländern, z. B. in Deutschland)", "{en} France et en Allemagne", "in Frankreich und in Deutschland", "en – à – dans: dreimal „in“", []],
+["3", "à", "in (vor Städten, z. B. in München)", "Tu es {à} Munich ?", "Bist du in München?", "en – à – dans: dreimal „in“", []],
+["3", "dans", "in (vor einem Ding, z. B. im Zug)", "Tu es {dans} le train ?", "Bist du im Zug?", "en – à – dans: dreimal „in“", []],
+["3", "Allô ?", "Hallo? (am Telefon)", "", "", "In Frankreich meldet man sich am Telefon nicht mit seinem Namen, sondern mit „Allô?“.", ["allo"]],
+["3", "un train", "ein Zug", "", "", "Plural: les trains; englisch: train", []],
+["3", "Munich", "München", "", "", "", []],
+["3", "son/sa/ses", "sein/seine; ihr/ihre (+ Nomen)", "{Ses} copains et ses copines arrivent.", "Seine/Ihre Freunde und seine/ihre Freundinnen kommen an.", "son copain (sein/ihr Freund), sa copine (seine/ihre Freundin), ses copains, ses copines", ["son / sa / ses", "son sa ses"]],
+["3", "C’est ça ?", "Stimmt’s?", "", "", "", []],
+["3", "avoir", "haben", "", "", "avoir: j’ai, tu as, il a, elle a, on a, nous avons, vous avez, ils ont, elles ont. Achte auf die Aussprache: ils_ont (sie haben), aber: ils sont (sie sind)", []],
+["3", "encore", "noch", "", "", "", []],
+["3", "un DVD", "eine DVD", "", "", "des DVD wie des CD und des BD: ohne -s im Plural", []],
+["3", "avoir faim", "Hunger haben", "Vous avez {faim} ?", "Habt ihr / Haben Sie Hunger?", "", []],
+["3", "manger qc", "etwas essen", "", "", "manger: je mange, tu manges, il/elle/on mange, nous mangeons, vous mangez, ils/elles mangent. Achte auf das e bei „nous mangeons“", []],
+["3", "souffler qc", "etwas ausblasen", "", "", "", []],
+["3", "chanter", "singen", "", "", "chanter: je chante, tu chantes, il/elle/on chante, nous chantons, vous chantez, ils/elles chantent", []],
+["3", "avoir onze ans", "elf Jahre alt sein", "Mehdi {a onze ans}.", "Mehdi ist elf Jahre alt.", "Achte auf den Unterschied: J’ai onze ans, maintenant ! = Ich bin jetzt 11 Jahre alt.", []],
+["3", "avoir envie de faire qc", "Lust haben, etwas zu tun", "Tu as {envie} de regarder un DVD ?", "Hast du Lust, eine DVD anzusehen?", "", []],
+["3", "sur", "auf, über", "un jeu vidéo {sur} mon ordinateur", "ein Computerspiel auf meinem Computer", "un livre sur Paris (ein Buch über Paris)", []],
+["3", "une surprise", "eine Überraschung", "", "", "englisch: surprise", []],
+["3", "un mois", "ein Monat", "L’année a 12 {mois}.", "Ein Jahr hat zwölf Monate.", "", []],
+["3", "une année", "ein Jahr", "", "", "", []],
+["3", "quand", "wann", "L’anniversaire de Léo, c’est {quand} ?", "Wann hat Léo Geburtstag?", "", []],
+["3", "le premier", "der erste", "L’anniversaire de Marie, c’est le {premier} mars.", "Marie hat am ersten März Geburtstag.", "Statt le premier kannst du auch le 1er schreiben. Ab der Zahl zwei schreibt man beim Datum so: le deux décembre (der 2. Dezember), le trois février (der 3. Februar).", ["le 1er"]],
+["3", "l’âge (m.)", "das Alter", "Tu as quel {âge} ?", "Wie alt bist du?", "englisch: age", []],
+["3", "il s’appelle", "er heißt", "Il {s’appelle} Léo.", "Er heißt Léo.", "", []],
+["3", "treize", "13", "", "", "", []],
+["3", "quatorze", "14", "", "", "", []],
+["3", "quinze", "15", "", "", "", []],
+["3", "seize", "16", "", "", "", []],
+["3", "dix-sept", "17", "", "", "", []],
+["3", "dix-huit", "18", "", "", "", []],
+["3", "dix-neuf", "19", "", "", "", []],
+["3", "janvier", "Januar", "", "", "", []],
+["3", "février", "Februar", "", "", "", []],
+["3", "mars", "März", "", "", "", []],
+["3", "avril", "April", "", "", "", []],
+["3", "mai", "Mai", "", "", "", []],
+["3", "juin", "Juni", "", "", "", []],
+["3", "maintenant", "jetzt", "", "", "", []],
+["3", "demain", "morgen", "Tu es là {demain} ?", "Bist du morgen da?", "À demain ! = Bis morgen!", []],
+["3", "toujours", "immer", "{Toujours} des histoires.", "Immer dasselbe Theater.", "", []],
+["3", "souvent", "oft", "", "", "", []],
+["3", "puis", "dann", "", "", "", []],
+["3", "tout de suite", "sofort", "", "", "", []],
+["3", "une famille", "eine Familie", "", "", "englisch: family", []],
+["3", "un enfant", "ein Kind", "", "", "Achte auf die Bindung: les_enfants", []],
+["3", "ton/ta/tes", "dein/deine", "", "", "mon/ton copain, ma/ta copine, mes/tes copains, mes/tes copines", ["ton / ta / tes", "ton ta tes"]],
+["3", "mon/ma/mes", "mein/meine", "", "", "mon/ton copain, ma/ta copine, mes/tes copains, mes/tes copines", ["mon / ma / mes", "mon ma mes"]],
+["3", "C’est dommage.", "Das ist schade.", "", "", "", []],
+["3", "inviter qn", "jemanden einladen", "Tu {invites} tes copains ?", "Lädst du deine Freunde ein?", "inviter: j’invite, tu invites, il/elle/on invite, nous invitons, vous invitez, ils/elles invitent; englisch: to invite", []],
+["3", "allemand/allemande", "deutsch", "", "", "", ["allemand", "allemande"]],
+["3", "en allemand", "auf Deutsch", "", "", "", []],
+["3", "À bientôt !", "Bis bald.", "", "", "", ["A bientôt"]],
+["3", "maman (f.)", "Mama, Mutti", "À bientôt, {maman} !", "Bis bald, Mama!", "", []],
+["3", "une chambre", "ein (Schlaf)Zimmer", "", "", "", []],
+["3", "une bougie", "eine Kerze", "", "", "la bougie (die Kerze) → les bougies (die Kerzen)", []],
+["3", "un gâteau/des gâteaux", "ein Kuchen / Kuchen", "Mme Pirou prépare un {gâteau} pour six.", "Mme Pirou bereitet einen Kuchen für sechs (Personen) vor.", "Plural mit -x, ebenso: un cadeau/des cadeaux", ["un gâteau", "des gâteaux"]],
+["3", "ranger qc", "etwas aufräumen", "", "", "ranger: je range, tu ranges, il/elle/on range, nous rangeons, vous rangez, ils/elles rangent", []],
+["3", "s’il te plaît", "bitte (wenn man jemanden duzt)", "", "", "s’il vous plaît = wenn man jemanden siezt", ["s’il te plait"]],
+["3", "un jeu/des jeux", "ein Spiel / Spiele", "", "", "Achte auf den Plural mit -x: des cadeaux, des gâteaux, des jeux, des journaux", ["un jeu", "des jeux"]],
+["3", "un jeu vidéo/des jeux vidéo", "ein Computerspiel / Computerspiele", "", "", "Achte auf die Schreibung: des jeux vidéo", ["un jeu vidéo", "des jeux vidéo"]],
+["3", "une affaire", "eine Sache, eine Angelegenheit", "", "", "Achte auf die Bindung: mes_affaires", []],
+["3", "comme", "wie", "{Comme} tu préfères.", "Wie du willst.", "", []],
+["3", "préférer", "vorziehen, lieber mögen", "", "", "préférer: je préfère, tu préfères, il/elle/on préfère, nous préférons, vous préférez, ils/elles préfèrent; englisch: to prefer", []]
+];
+
+const WORDS = V.map(([u, fr, de, ex, exde, note, alt]) => { const m = (ex || '').match(/\{(.+?)\}/); return { u, fr, de, ex: ex ? ex.replace(/[{}]/g, '') : '', exde: exde || '', note: note || '', alt: alt || [], gap: m ? m[1] : null, before: m ? ex.slice(0, m.index) : '', after: m ? ex.slice(m.index + m[0].length) : '' }; });
+const CHARS = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'î', 'ï', 'ô', 'œ', 'ù', 'û'];
+const MODES = ['type', 'sent', 'fill'];
+const MODE = {
+  type: { name: 'Wort', title: 'Französisches Wort', desc: 'Das deutsche Wort steht da. Schreibe das französische Wort.', hint: 'Der Artikel (un, une, le, la) gehört dazu. Ein falscher Buchstabe zählt als Fehler.' },
+  sent: { name: 'Satz', title: 'Französischer Satz', desc: 'Der deutsche Satz steht da. Schreibe den französischen Satz.', hint: 'Ein falscher Buchstabe zählt als Fehler. Punkt und Leerzeichen vor ! und ? sind egal.' },
+  fill: { name: 'Lücke', title: 'Lückensatz', desc: 'Ein französischer Satz mit einer Lücke. Schreibe das fehlende Wort.', hint: 'Achte auf die richtige Form im Satz. Ein falscher Buchstabe zählt als Fehler.' }
+};
+
+const shuf = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const wn = s => s.toLowerCase().replace(/[’‘`´]/g, "'").replace(/\(.*?\)/g, '').replace(/\bq[nc]\/q[nc]\b/g, '').replace(/\bq[nc]\b/g, '').replace(/\.\.\.|…/g, ' ').replace(/[.!?,;:]/g, '').replace(/\s+/g, ' ').trim();
+const wAns = (w, fmt) => (fmt === 'fill' && w.gap ? [w.gap] : [w.fr].concat(w.alt)).map(wn).filter(Boolean);
+const keyOf = (fmt, w) => (fmt === 'type' ? '' : fmt + '|') + w.fr;
+const acc = r => { const n = r.ok + r.bad; return n ? Math.round(r.ok / n * 100) + ' %' : '–'; };
+
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.words) return s; } catch (e) {} return { words: {}, hist: [] }; }
+function persist() { try { localStorage.setItem(KEY, JSON.stringify(S.store)); } catch (e) {} }
+const S = { screen: 'home', fmt: 'type', n: 10, sess: null, open: null, store: load() };
+
+function pool(fmt) { return WORDS.filter(x => fmt === 'type' ? true : fmt === 'sent' ? (x.ex && x.exde) : !!x.gap); }
+function errItems() {
+  return [].concat(...MODES.map(f => pool(f).filter(w => { const r = S.store.words[keyOf(f, w)]; return r && r.last === 0; }).map(w => ({ w, fmt: f }))));
+}
+function go(screen) { S.screen = screen; S.open = null; if (screen !== 'play' && screen !== 'result') S.sess = null; render(); window.scrollTo(0, 0); }
+function begin(items, label, src) {
+  if (!items.length) return;
+  S.sess = { items, i: 0, checked: false, ok: null, val: null, log: [], label, src };
+  go('play');
+}
+function startMode(fmt) {
+  fmt = fmt || S.fmt;
+  const st = S.store.words;
+  const pr = w => { const r = st[keyOf(fmt, w)]; return !r ? 1 : r.last === 0 ? 0 : 2; };
+  const items = shuf(pool(fmt)).sort((a, b) => pr(a) - pr(b)).slice(0, S.n >= 999 ? 999 : S.n).map(w => ({ w, fmt }));
+  begin(items, MODE[fmt].title, fmt);
+}
+function startErr() { begin(shuf(errItems()), 'Fehler wiederholen', 'err'); }
+function record(key, ok) {
+  const r = S.store.words[key] || (S.store.words[key] = { ok: 0, bad: 0, last: 1 });
+  ok ? r.ok++ : r.bad++; r.last = ok ? 1 : 0; persist();
+}
+function finish() {
+  const s = S.sess; const ok = s.log.filter(x => x.ok).length;
+  S.store.hist = [{ t: Date.now(), label: s.label, ok, n: s.log.length }].concat(S.store.hist).slice(0, 30); persist();
+  go('result');
+}
+function judge(cur, val) {
+  const v = wn(val); if (!v) return false;
+  if (cur.fmt === 'sent') return v === wn(cur.w.ex);
+  return wAns(cur.w, cur.fmt).includes(v);
+}
+function check() {
+  const s = S.sess; if (!s || s.checked) return;
+  const el = document.getElementById('ans'); if (!el || !el.value.trim()) return;
+  const cur = s.items[s.i]; const ok = judge(cur, el.value);
+  record(keyOf(cur.fmt, cur.w), ok);
+  s.log.push({ ok, w: cur.w, fmt: cur.fmt }); s.checked = true; s.ok = ok; s.val = el.value; render();
+}
+function next() {
+  const s = S.sess; const i = s.i + 1;
+  if (i >= s.items.length) return finish();
+  s.i = i; s.checked = false; s.ok = null; s.val = null; render();
+}
+function retry() {
+  const s = S.sess; const bad = s.log.filter(x => !x.ok).map(x => ({ w: x.w, fmt: x.fmt }));
+  begin(bad, 'Fehler wiederholen', s.src);
+}
+
+/* ---------- views ---------- */
+const btn = (a, v, label, cls) => '<button class="btn ' + (cls || '') + '" data-a="' + a + '"' + (v !== undefined ? ' data-v="' + esc(v) + '"' : '') + '>' + label + '</button>';
+const promptOf = x => x.fmt === 'sent' ? x.w.exde : x.w.de;
+const answerOf = x => x.fmt === 'sent' ? x.w.ex : x.fmt === 'fill' && x.w.gap ? x.w.gap : x.w.fr;
+
+function vHome() {
+  const errN = errItems().length;
+  const icons = { type: '✍️', sent: '💬', fill: '🧩' };
+  return '<div class="col" style="gap:28px">' +
+    '<div class="col" style="gap:8px;padding-top:20px"><h6 class="acc">Französisch · Unité 3</h6><h1>Bonjour Daniil,</h1><div class="sp" style="margin-top:12px"></div></div>' +
+    '<div class="grid">' + MODES.map(f => '<div class="card col" style="align-items:flex-start;padding:24px;gap:12px"><span style="font-size:28px;line-height:1">' + icons[f] + '</span><h3>' + MODE[f].title + '</h3><p class="mute" style="font-size:15px">' + MODE[f].desc + '</p><p class="hint">' + pool(f).length + ' Aufgaben</p>' + btn('setup', f, 'Üben →', 'pri') + '</div>').join('') + '</div>' +
+    '<div class="row">' + (errN ? btn('start-err', undefined, '↺ ' + errN + ' Fehler wiederholen') : '') + btn('parent', undefined, '📊 Elternbereich', 'ghost') + '</div></div>';
+}
+function vSetup() {
+  const total = pool(S.fmt).length;
+  const counts = [5, 10].filter(n => n < total).concat(999);
+  const cur = S.n >= 999 || S.n >= total ? 999 : S.n;
+  return '<div class="col" style="gap:24px;padding-top:8px">' + btn('home', undefined, '← Zurück', 'ghost') + '<h2>Üben</h2>' +
+    '<div class="col" style="gap:10px"><h6>Aufgabenform</h6><div class="row">' + MODES.map(f => btn('fmt', f, MODE[f].name, S.fmt === f ? 'sel' : '')).join('') + '</div><p class="hint">' + MODE[S.fmt].desc + ' ' + MODE[S.fmt].hint + '</p></div>' +
+    '<div class="col" style="gap:10px"><h6>Aufgaben pro Runde</h6><div class="row">' + counts.map(n => btn('n', n, n === 999 ? 'Alle (' + total + ')' : n, cur === n || (n !== 999 && S.n === n) ? 'sel' : '')).join('') + '</div><p class="hint">Neue und falsch beantwortete Aufgaben kommen zuerst.</p></div>' +
+    '<div>' + btn('start', undefined, 'Starten · ' + (cur === 999 ? total : Math.min(S.n, total)) + ' Aufgaben →', 'pri') + '</div></div>';
+}
+function vBars() {
+  const log = S.sess.log;
+  const okN = log.filter(x => x.ok).length, badN = log.length - okN, m = Math.max(okN, badN, 1);
+  return '<div class="bars">' + [['ok', 'richtig', okN, 'var(--accent)', 'var(--accent-l)', 'Richtig beantwortet'], ['bad', 'falsch', badN, 'var(--bad)', '#cfd3e5', 'Falsch beantwortet']].map(([k, label, n, color, nc, title]) => {
+    const ws = log.filter(x => (k === 'ok') === !!x.ok).map(x => x.w.fr);
+    return '<div class="bar" data-a="bar" data-v="' + k + '"><div class="pop' + (S.open === k ? ' on' : '') + '"><h6>' + title + '</h6>' + (ws.length ? ws.map(x => '<div>' + esc(x) + '</div>').join('') : '<div class="mute">Noch keine</div>') + '</div>' +
+      '<span class="n" style="color:' + nc + '">' + n + '</span><div class="b" style="height:' + Math.round(n / m * 80) + 'px;background:' + color + '"></div><span class="l">' + label + '</span></div>';
+  }).join('') + '</div>';
+}
+function vPlay() {
+  const s = S.sess; const cur = s.items[s.i]; const w = cur.w, fmt = cur.fmt, fill = fmt === 'fill', sent = fmt === 'sent';
+  const dis = s.checked ? ' disabled' : '';
+  let h = '<div class="col" style="gap:28px;padding-top:8px">';
+  h += '<div class="top">' + btn('quit', undefined, '✕ Zum Menü') + '<div class="prog"><i style="width:' + Math.round(s.i / s.items.length * 100) + '%"></i></div><span class="mute" style="font-size:13px;min-width:48px;text-align:right">' + (s.i + 1) + ' / ' + s.items.length + '</span></div>';
+  h += '<div class="col" style="gap:20px;min-height:240px"><h6 class="acc">' + MODE[fmt].title + '</h6><div class="main">' + esc(promptOf(cur)) + '</div>';
+  h += '<div class="sent">' + (fill && w.before.trim() ? '<span>' + esc(w.before.trim()) + '</span>' : '') +
+    '<input id="ans" class="input' + (fill ? ' sm' : '') + '" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + (fill ? '…' : 'Français') + '" value="' + esc(s.val || '') + '"' + dis + '>' +
+    (fill && w.after.trim() ? '<span>' + esc(w.after.trim()) + '</span>' : '') + '</div>';
+  if (!s.checked) h += '<div class="row" style="gap:8px">' + CHARS.map(c => '<button class="btn key" data-a="char" data-v="' + c + '">' + c + '</button>').join('') + '</div>';
+  if (s.checked) {
+    const txt = s.ok ? (sent ? '' : (w.ex ? w.fr + ' · ' + w.ex : '')) : 'Richtig: ' + answerOf(cur) + (!sent && w.note ? ' · ' + w.note : '');
+    h += '<div class="fb" style="box-shadow:0 0 0 1px ' + (s.ok ? 'var(--accent)' : 'var(--mute)') + '"><span class="ic" style="color:' + (s.ok ? 'var(--accent)' : 'var(--mute)') + '">' + (s.ok ? '✓' : '✗') + '</span><div><div style="font-weight:600">' + (s.ok ? 'Richtig' : 'Nicht ganz') + '</div>' + (txt ? '<div style="color:#cfd3e5">' + esc(txt) + '</div>' : '') + '</div></div>';
+  }
+  h += '</div>';
+  h += '<div>' + (s.checked ? btn('next', undefined, (s.i + 1 >= s.items.length ? 'Ergebnis' : 'Weiter') + ' →', 'pri') : btn('check', undefined, 'Prüfen', 'pri')) + '</div>';
+  h += vBars() + '</div>';
+  return h;
+}
+function vResult() {
+  const s = S.sess; const ok = s.log.filter(x => x.ok).length, n = s.log.length, bad = s.log.filter(x => !x.ok);
+  return '<div class="col" style="gap:24px;padding-top:20px"><h6 class="acc">' + esc(s.label) + '</h6>' +
+    '<div class="row" style="align-items:baseline;gap:14px"><span class="score">' + ok + '</span><span class="mute" style="font-size:22px">/ ' + n + '</span></div>' +
+    '<p style="color:#cfd3e5">' + (ok === n ? 'Alles richtig.' : ok / n >= 0.7 ? 'Gut. Die Fehler unten kurz wiederholen.' : 'Die Fehler unten noch einmal üben.') + '</p>' +
+    (bad.length ? '<div class="card col" style="gap:4px"><h6 style="margin-bottom:6px">Zum Wiederholen</h6>' + bad.map(x => '<div class="mr"><span>' + esc(promptOf(x)) + '</span><span>' + esc(x.fmt === 'sent' ? x.w.ex : x.w.fr) + '</span></div>').join('') + '</div>' : '') +
+    '<div class="row">' + (bad.length ? btn('retry', undefined, '↺ Fehler wiederholen', 'pri') : '') + btn('again', undefined, 'Neue Runde') + btn('home', undefined, 'Zum Menü', 'ghost') + '</div></div>';
+}
+function vParent() {
+  const st = S.store.words;
+  const rows = MODES.map(f => { let ok = 0, bad = 0; pool(f).forEach(w => { const r = st[keyOf(f, w)]; if (r) { ok += r.ok; bad += r.bad; } }); return '<tr><td>' + MODE[f].title + '</td><td>' + (ok + bad) + '</td><td>' + acc({ ok, bad }) + '</td></tr>'; }).join('');
+  const weak = WORDS.filter(w => MODES.some(f => { const r = st[keyOf(f, w)]; return r && r.bad > 0 && r.bad >= r.ok; }));
+  const hist = S.store.hist.slice(0, 8);
+  return '<div class="col" style="gap:28px;padding-top:8px">' + btn('home', undefined, '← Zurück', 'ghost') + '<h2>Elternbereich</h2>' +
+    '<div class="col" style="gap:10px"><h6>Aufgabenformen</h6><table><thead><tr><th>Form</th><th>Antworten</th><th>Trefferquote</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+    '<div class="col" style="gap:10px"><h6>Schwierige Wörter</h6>' + (weak.length ? '<div class="row" style="gap:8px">' + weak.map(x => '<span class="tag">' + esc(x.fr) + '</span>').join('') + '</div>' : '<p class="mute">Noch keine Fehler erfasst.</p>') + '</div>' +
+    '<div class="col" style="gap:10px"><h6>Letzte Runden</h6>' + (hist.length ? '<table><tbody>' + hist.map(h => '<tr><td>' + new Date(h.t).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' }) + '</td><td>' + esc(h.label) + '</td><td>' + h.ok + ' / ' + h.n + '</td></tr>').join('') + '</tbody></table>' : '<p class="mute">Noch keine Runden.</p>') + '</div>' +
+    '<div>' + btn('reset', undefined, '🗑 Ergebnisse zurücksetzen', 'ghost') + '</div></div>';
+}
+function render() {
+  const v = { home: vHome, setup: vSetup, play: vPlay, result: vResult, parent: vParent }[S.screen];
+  const prev = document.getElementById('ans'); const draft = prev && !prev.disabled ? prev.value : null;
+  document.getElementById('app').innerHTML = v();
+  const el = document.getElementById('ans');
+  if (el && !el.disabled) { if (draft) el.value = draft; el.focus(); }
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-a]'); if (!t) return;
+  const a = t.dataset.a, v = t.dataset.v, s = S.sess;
+  switch (a) {
+    case 'home': case 'parent': return go(a);
+    case 'setup': S.fmt = v; return go('setup');
+    case 'quit': return go('home');
+    case 'fmt': S.fmt = v; return render();
+    case 'n': S.n = +v; return render();
+    case 'start': return startMode();
+    case 'start-err': return startErr();
+    case 'check': return check();
+    case 'next': return next();
+    case 'char': { const el = document.getElementById('ans'); if (el && !el.disabled) { el.value += v; el.focus(); } return; }
+    case 'bar': S.open = S.open === v ? null : v; return render();
+    case 'retry': return retry();
+    case 'again': return s.src === 'err' ? startErr() : startMode(s.src);
+    case 'reset': if (confirm('Alle gespeicherten Ergebnisse löschen?')) { S.store = { words: {}, hist: [] }; persist(); render(); } return;
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' || S.screen !== 'play' || !S.sess) return;
+  if (S.sess.checked) { e.preventDefault(); next(); }
+  else if (e.target && e.target.id === 'ans') check();
+});
+render();
+</script>
+</body>
+</html>
